@@ -16,6 +16,12 @@ import java.util.Date
 
 class CreateActivity : AppCompatActivity() {
 
+    companion object {
+
+        operator fun get(context: Context): Intent {
+            return Intent(context, CreateActivity::class.java)
+        }
+    }
     private var editText: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,23 +47,18 @@ class CreateActivity : AppCompatActivity() {
     }
 
     private fun save() {
-        DataStore.execute {
+        DataStore.execute(Runnable {
             val note = updateNote()
-            DataStore.getNotes().insert(note)
-        }
+            DataStore.notes.insert(note)
+        })
     }
 
     private fun updateNote(): Note {
         val note = Note()
-        note.text = editText!!.text.toString()
+        note.text = editText?.text.toString()
         note.updatedAt = Date()
         return note
     }
 
-    companion object {
 
-        operator fun get(context: Context): Intent {
-            return Intent(context, CreateActivity::class.java)
-        }
-    }
 }

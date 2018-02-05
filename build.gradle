@@ -2,12 +2,13 @@
 
 buildscript {
     ext.kotlin_version = '1.2.21'
-
+    ext.anko_version='0.10.4'
     ext.support_version = '26.1.0'
     
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
@@ -23,13 +24,6 @@ allprojects {
     }
 }
 
-
-repositories {
-    mavenCentral()
-}
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-}
 compileKotlin {
     kotlinOptions {
         jvmTarget = "1.8"
